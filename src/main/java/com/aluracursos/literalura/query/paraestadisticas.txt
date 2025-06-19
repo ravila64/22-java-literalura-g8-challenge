@@ -1,0 +1,6 @@
+//      List<Libro> dbLibros = libroRepository.findAll();
+//      DoubleSummaryStatistics est = dbLibros.stream()
+//            .filter(l -> l.getDownloads() > 0)
+//            .collect(Collectors.summarizingDouble(Libro::getDownloads));
+
+imprimir la est con todos los metodos que tengan

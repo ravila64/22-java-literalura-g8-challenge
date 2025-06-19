@@ -1,0 +1,5 @@
+ //@Query(value = "SELECT * FROM libros ORDER BY downloads DESC LIMIT 10", nativeQuery= true)
+ //List<Libro> filtrarLibrosPorDescargas();
+
+ // no lo hice por no tengo descargas en la base de datos
+
