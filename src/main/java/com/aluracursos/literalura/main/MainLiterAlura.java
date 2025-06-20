@@ -100,6 +100,7 @@ public class MainLiterAlura {
 
    public Optional<DatosLibro> getDatosLibro(String tituloUsu) {
       String json = consumirAPI.obtenerDatos(URL_BASE + URL_FIND + tituloUsu.toLowerCase().replace(" ", "+"));
+      //List<DatosLibro> libros = convertirDatos.convertData(json, Datos.class).results();
       List<DatosLibro> libros = convertirDatos.convertData(json, Datos.class).results();
       return libros.stream()
             .filter(l -> l.titulo().toLowerCase().contains(tituloUsu.toLowerCase()))
