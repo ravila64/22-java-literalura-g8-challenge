@@ -9,22 +9,23 @@ para BackEnd
 <h3>Inicio</h3>
 <em> MENU DE OPCIONES </em>
 - - - - - - - - - - - - - - - - - - - - - -
-1. Buscar libro por título y grabar en BD.
-2. Listar libros registrados BD.
-3. Listar autores registrados BD.
-4. Listar autores vivos en un determinado año BD.
-5. Listar autores fallecidos BD.
-6. Listar libros por idioma BD.
-7. Libros mas populares en la API gutendex.
-8. Buscar autor por nombre BD.
-0. Salir.
+1. Buscar libro por título y grabar en BD. </br>
+2. Listar libros registrados BD. </br>
+3. Listar autores registrados BD. </br>
+4. Listar autores vivos en un determinado año BD. </br>
+5. Listar autores fallecidos BD. </br>
+6. Listar libros por idioma BD. </br>
+7. Libros mas populares en la API GUTENDEX. </br>
+8. Buscar autor por nombre BD. </br>
+0. Salir.</br> 
 
-NOTAS ANTES DE UTILIZAR EL PROYECTO
-* Utilizar una variable de entorno DB_NAME_4, con db_libros
-* o Colocar DB_NAME = db_libros, y en properties dejar DB_NAME
-* Se esta utilizando JDK 17, e Intellij IDEA
-* Las opciones 1) esta capturando los libros y se sale del programa
-* y la opcion 6) busqueda x idioma, en construccion.
+NOTAS ANTES DE UTILIZAR EL PROYECTO </br>
+* Utilizar una variable de entorno DB_NAME_4, con db_libros </br>
+* o Colocar DB_NAME = db_libros, y en properties dejar DB_NAME </br>
+* Se esta utilizando JDK 17, e Intellij IDEA </br>
+* Las opciones 1) esta capturando los libros y se sale del programa </br>
+* y la opcion 6) busqueda x idioma, no me ha funcionado, en desarrollo. </br>
+* Las demas opciones estan FUNCIONANDO. </br>
 
 <h2>Descripción proyecto</h2>
 Construir tu propio de consulta de libros a la API GUTENDEX <br/>
@@ -80,7 +81,7 @@ de digitación se devuelve a leer opción. </br>
 
 <h2>Buscar libro por titulo</h2>
 Digite opcion [1..8] 0=Salir--->1 </br>
-Ingresar titulo del libro a buscar:
+Ingresar titulo del libro a buscar: 
 Little Women </br>
 Hibernate: select l1_0.id,l1_0.autor_id,l1_0.idioma,l1_0.titulo from libros l1_0 where upper(l1_0.titulo) like upper(?) escape '\' </br>
 Hibernate: select a1_0.id,a1_0.nombre,a1_0.year_born,a1_0.year_dead from autores a1_0 where upper(a1_0.nombre) like upper(?) escape '\' </br>
@@ -97,15 +98,15 @@ Hibernate: SELECT l.titulo AS titulo, a.nombre AS nombreAutor </br>
 FROM libros l </br>
 INNER JOIN autores a ON l.autor_id = a.id </br>
 ```
-LibroAutor{Titulo='Cervantes Saavedra, Miguel de'Autor='Don Quijote'}
-LibroAutor{Titulo='Melville, Herman'Autor='Moby Dick; Or, The Whale'}
-LibroAutor{Titulo='Hugo, Victor'Autor='Los miserables - Tomo 1 (de 2)'}
-LibroAutor{Titulo='Shelley, Mary Wollstonecraft'Autor='Frankenstein; Or, The Modern Prometheus'}
-LibroAutor{Titulo='Austen, Jane'Autor='Pride and Prejudice'}
-LibroAutor{Titulo='Shakespeare, William'Autor='The Complete Works of William Shakespeare'}
-LibroAutor{Titulo='Eliot, George'Autor='Middlemarch'}
-LibroAutor{Titulo='Alcott, Louisa May'Autor='Little Women; Or, Meg, Jo, Beth, and Amy'}
-Cantidad de libros 8
+LibroAutor{Titulo='Cervantes Saavedra, Miguel de'Autor='Don Quijote'} </br> 
+LibroAutor{Titulo='Melville, Herman'Autor='Moby Dick; Or, The Whale'} </br> 
+LibroAutor{Titulo='Hugo, Victor'Autor='Los miserables - Tomo 1 (de 2)'}   </br>
+LibroAutor{Titulo='Shelley, Mary Wollstonecraft'Autor='Frankenstein; Or, The Modern Prometheus'} </br>
+LibroAutor{Titulo='Austen, Jane'Autor='Pride and Prejudice'} </br>
+LibroAutor{Titulo='Shakespeare, William'Autor='The Complete Works of William Shakespeare'} </br>
+LibroAutor{Titulo='Eliot, George'Autor='Middlemarch'} </br>
+LibroAutor{Titulo='Alcott, Louisa May'Autor='Little Women; Or, Meg, Jo, Beth, and Amy'} </br>
+Cantidad de libros 8 </br>
 ```
 [Inicio](#Inicio)
 <h2>Listar autores registrados BD</h2> 
