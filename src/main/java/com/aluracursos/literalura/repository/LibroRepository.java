@@ -2,6 +2,7 @@ package com.aluracursos.literalura.repository;
 
 import com.aluracursos.literalura.dto.AutorDTO;
 import com.aluracursos.literalura.dto.LibroAutorDTO;
+import com.aluracursos.literalura.dto.LibroDTO;
 import com.aluracursos.literalura.model.DatosLibro;
 import com.aluracursos.literalura.model.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,19 +32,13 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     """, nativeQuery = true)
    List<Object[]> listarLibrosYAutores();
 
-//   @Query(value = """
-//    SELECT l.titulo AS titulo, a.nombre AS nombreAutor
-//    FROM libros l
-//    INNER JOIN autores a ON l.autor_id = a.id
-//    WHERE l.idioma LIKE :lang%
-//    """, nativeQuery = true)
-//   List<LibroAutorDTO> filtrarLibrosPorIdioma(String lang);
+   @Query(value = "SELECT * FROM libros l WHERE l.idioma LIKE :language ", nativeQuery = true)
+    List<LibroDTO> buscarLibrosPorIdiomaLike(String language);
 
-   @Query(value = """
-    SELECT l.titulo, a.nombre  FROM libros l 
-    INNER JOIN autores a ON l.autor_id = a.id 
-    WHERE l.idioma LIKE :language """,
-    nativeQuery = true)
-   List<LibroAutorDTO> buscarLibrosPorIdiomaLike(String language);
+   // INNER JOIN autores a ON l.autor_id = a.id
    //List<LibroAutorDTO> buscarLibrosPorIdiomaLike(@Param("idioma") String language);
+
+//   @Query(value = "SELECT * FROM libros WHERE idioma IN (:idiomas)", nativeQuery = true)
+//   List<Libro> findByIdiomaEnLista(@Param("idioma") List<String> idiomas);
+
 }

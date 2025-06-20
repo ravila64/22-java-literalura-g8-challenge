@@ -11,6 +11,8 @@ import com.aluracursos.literalura.repository.AutorRepository;
 import com.aluracursos.literalura.repository.LibroRepository;
 import com.aluracursos.literalura.service.ConsumirAPI;
 import com.aluracursos.literalura.service.ConvertirDatos;
+import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Year;
 import java.util.List;
@@ -197,7 +199,19 @@ public class MainLiterAlura {
       autoresFallecidos.forEach(System.out::println);
    }
 
-   public void obtenerLibrosPorIdioma() {
+
+//   public List<LibroDTO> obtenerLibrosPorIdiomaLike(String idiomaParcial) {
+//       String parametro = idiomaParcial.trim() + "%"; // Ej: "Span%" para "Spanish"
+//       return libroRepository.buscarLibrosPorIdiomaLike(parametro).stream()
+//               .map(obj -> new LibroDTO(
+//                       (String) obj[0],
+//                       (String) obj[1],
+//                       (Autor) autor
+//               ))
+//               .collect(Collectors.toList());
+//   }
+
+    public void obtenerLibrosPorIdioma() {
       List<String> idiomas = List.of("es", "en", "it", "fr", "pt", "fi");
       String menuIdiomas = """
             [es] - Español       [en] - Inglés
@@ -205,16 +219,22 @@ public class MainLiterAlura {
             [pt] - Portugués     [fi] - Filandés 
             """;
       System.out.println(menuIdiomas);
-      System.out.print("Ingrese codigo del idioma a buscar: ej: es en---> ");
+      System.out.print("Ingrese codigo del idioma a buscar: ej: es=español en=english---> ");
       String codigoIdioma = teclado.nextLine();
       // valida
       while (!idiomas.contains(codigoIdioma)) {
          System.out.println("Error, ingresar un idioma de la lista: ");
          codigoIdioma = teclado.nextLine();
       }
-      List<LibroAutorDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
+      //List<LibroAutorDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
+
+
+      List<LibroDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
       if (!dbLibros.isEmpty()) {
-         dbLibros.forEach(System.out::println);
+         List<LibroDTO> filtrados = dbLibros.stream()
+                 .filter(libro -> idiomas.contains(libro.getIdioma()))
+                 .toList();
+         filtrados.forEach(System.out::println);
       } else {
          System.out.println("No hay libros registrados del idioma : " + codigoIdioma);
       }
