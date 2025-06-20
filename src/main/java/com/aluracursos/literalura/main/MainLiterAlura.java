@@ -1,6 +1,8 @@
 package com.aluracursos.literalura.main;
 
+import com.aluracursos.literalura.dto.AutorDTO;
 import com.aluracursos.literalura.dto.Datos;
+import com.aluracursos.literalura.dto.LibroAutorDTO;
 import com.aluracursos.literalura.model.Autor;
 import com.aluracursos.literalura.model.DatosLibro;
 import com.aluracursos.literalura.model.Libro;
@@ -34,16 +36,17 @@ public class MainLiterAlura {
    public void menuPrincipal() {
       while (opcion != 0) {
          String OPC = """
-                    1. Buscar libro por título.
-                    2. Listar libros registrados.
-                    3. Listar autores registrados.
-                    4. Listar autores vivos en un determinado año.
-                    5. Listar autores fallecidos
-                    6. Listar libros por idioma.
-                    7. Libros mas populares en la API gutendex
-                    8- Buscar autor por nombre.
-                    0- Salir.
-                    """;
+               - - - - - - - - - - - - - - - - - - - - - -
+               1. Buscar libro por título.
+               2. Listar libros registrados.
+               3. Listar autores registrados.
+               4. Listar autores vivos en un determinado año.
+               5. Listar autores fallecidos.
+               6. Listar libros por idioma.
+               7. Libros mas populares en la API gutendex.
+               8- Buscar autor por nombre.
+               0- Salir.
+               """;
          System.out.println(OPC);
          System.out.print("Digite opcion [1..8] 0=Salir--->");
          opcion = teclado.nextInt();
@@ -116,49 +119,73 @@ public class MainLiterAlura {
                .map(a -> autorRepository.findByNombreContainsIgnoreCase(a.nombre())
                      .orElseGet(() -> autorRepository.save(new Autor(a))))
                .collect(Collectors.toList());
-         Libro nuevoLibroBD = new Libro(libroEnAPI.get(),listaAutores);
+         Libro nuevoLibroBD = new Libro(libroEnAPI.get(), listaAutores);
          libroRepository.save(nuevoLibroBD);
          System.out.println(nuevoLibroBD);
       } else {
-         System.out.println("Libro no encontrado :(");
+         System.out.println("Libro no encontrado !!! ");
       }
+   }
+
+   public List<LibroAutorDTO> getLibroAutor() {
+      List<Object[]> rawResults = libroRepository.findLibroAutorRaw();
+      return rawResults.stream()
+            .map(obj -> new LibroAutorDTO(
+                  (String) obj[0],
+                  (String) obj[1]
+            ))
+            .collect(Collectors.toList());
    }
 
    public void obtenerTodosLosLibros() {
       //List<Libro> dbLibros = libroRepository.findAll();
-      List<Libro> dbLibros = libroRepository.obtenerLibrosConAutores();
-      if (!dbLibros.isEmpty()){
-         //dbLibros.forEach(libro -> System.out.println(libro));
-         dbLibros.forEach(System.out::println);
-         System.out.println("Cantidad de libros grabados "+dbLibros.size());
-      }else{
+      List<LibroAutorDTO> librosAutores = this.getLibroAutor();
+      if (!librosAutores.isEmpty()) {
+         librosAutores.forEach(System.out::println);
+         System.out.println("Cantidad de libros "+librosAutores.size());
+      } else {
          System.out.println("No existen libros");
       }
    }
 
+   public List<AutorDTO> obtenerAutoresDTO() {
+      List<Object[]> resultados = autorRepository.findAutoresRaw();
+      return resultados.stream()
+            .map(obj -> new AutorDTO(
+                  (String) obj[0],
+                  (Integer) obj[1],
+                  (Integer) obj[2]
+            ))
+            .collect(Collectors.toList());
+   }
+
    public void obtenerTodosLosAutores() {
-      List<Autor> dbAutores = autorRepository.findAll();
-      dbAutores.forEach(System.out::println);
-      System.out.println("Cantidad de autores grabados "+dbAutores.size());
+      List<AutorDTO> dbAutores = this.obtenerAutoresDTO();
+      if (!dbAutores.isEmpty()) {
+         dbAutores.forEach(System.out::println);
+         System.out.println("Cantidad de autores grabados " + dbAutores.size());
+      } else {
+         System.out.println("No hay autores grabados en BD");
+      }
    }
 
    public void autoresVivosDadoUnAnio() {
       int anioActual = Year.now().getValue();
-      boolean salir=false;
-      int year=0;
-      while (!salir){
+      boolean salir = false;
+      int year = 0;
+      while (!salir) {
          System.out.println("Ingresa el año para consultar los autores que vivieron alredor de ese año : ");
          year = teclado.nextInt();
          teclado.nextLine();
-         if(year > (anioActual-100)){
+         if (year > (anioActual - 100)) {
             salir = true;
          }
          System.out.println("Digite un año del ultimo siglo, ya que son autores vivos");
       }
       List<Autor> autoresBuscados = autorRepository.filtrarAutoresXAnioVivos(year);
-      if(!autoresBuscados.isEmpty()){
+      if (!autoresBuscados.isEmpty()) {
          autoresBuscados.forEach(System.out::println);
-      }else{
+      } else {
          System.out.println("No hay autores vivos");
       }
    }
@@ -172,10 +199,10 @@ public class MainLiterAlura {
    public void obtenerLibrosPorIdioma() {
       List<String> idiomas = List.of("es", "en", "it", "fr", "pt", "fi");
       String menuIdiomas = """
-                [es] - Español       [en] - Inglés
-                [it] - Italiano      [fr] - Francés
-                [pt] - Portugués     [fi] - Filandés 
-                """;
+            [es] - Español       [en] - Inglés
+            [it] - Italiano      [fr] - Francés
+            [pt] - Portugués     [fi] - Filandés 
+            """;
       System.out.println(menuIdiomas);
       System.out.print("Ingrese codigo del idioma a buscar: ej: es en---> ");
       String codigoIdioma = teclado.nextLine();
@@ -187,25 +214,25 @@ public class MainLiterAlura {
       List<Libro> dbLibros = libroRepository.filtrarLibrosPorIdioma(codigoIdioma);
 
       if (dbLibros.isEmpty()) {
-         System.out.println("No hay libros registrados del idioma : "+ codigoIdioma);
+         System.out.println("No hay libros registrados del idioma : " + codigoIdioma);
       } else {
          dbLibros.forEach(System.out::println);
       }
    }
 
-   public void obtenerLibrosMasPopulares(){
+   public void obtenerLibrosMasPopulares() {
       List<DatosLibro> librosMasPopulares = getPopularDatosLibro().stream()
             .limit(10)
             .toList();
-            // estaba collect(Collectors.toList())
+      // estaba collect(Collectors.toList())
       System.out.println("Libros mas populares");
       librosMasPopulares.forEach(b -> System.out.println(b.toString()));
    }
 
    public void obtenerAutoresPorNombre() {
-      System.out.println("Digite nombre autor: ");
-      String nombreAut = teclado.nextLine();
-      Optional<Autor> autorEnLaBD = autorRepository.findByNombreContainsIgnoreCase(nombreAut);
+      System.out.print("Digite nombre autor: ");
+      String nombre = teclado.nextLine();
+      Optional<Autor> autorEnLaBD = autorRepository.findByNombreContainsIgnoreCase(nombre);
 
       if (autorEnLaBD.isPresent()) {
          System.out.println(autorEnLaBD.get());

@@ -1,9 +1,7 @@
 package com.aluracursos.literalura.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "libros")
@@ -14,6 +12,7 @@ public class Libro {
    private String titulo;
    private String idioma;
    @ManyToOne
+   @JoinColumn(name = "autor_id")
    private Autor autor;
 
    public Libro() {}
