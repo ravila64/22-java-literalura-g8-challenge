@@ -3,6 +3,7 @@ package com.aluracursos.literalura.main;
 import com.aluracursos.literalura.dto.AutorDTO;
 import com.aluracursos.literalura.dto.Datos;
 import com.aluracursos.literalura.dto.LibroAutorDTO;
+import com.aluracursos.literalura.dto.LibroDTO;
 import com.aluracursos.literalura.model.Autor;
 import com.aluracursos.literalura.model.DatosLibro;
 import com.aluracursos.literalura.model.Libro;
@@ -128,7 +129,7 @@ public class MainLiterAlura {
    }
 
    public List<LibroAutorDTO> getLibroAutor() {
-      List<Object[]> rawResults = libroRepository.findLibroAutorRaw();
+      List<Object[]> rawResults = libroRepository.listarLibrosYAutores();
       return rawResults.stream()
             .map(obj -> new LibroAutorDTO(
                   (String) obj[0],
@@ -149,7 +150,7 @@ public class MainLiterAlura {
    }
 
    public List<AutorDTO> obtenerAutoresDTO() {
-      List<Object[]> resultados = autorRepository.findAutoresRaw();
+      List<Object[]> resultados = autorRepository.listarAutoresBD();
       return resultados.stream()
             .map(obj -> new AutorDTO(
                   (String) obj[0],
@@ -211,12 +212,11 @@ public class MainLiterAlura {
          System.out.println("Error, ingresar un idioma de la lista: ");
          codigoIdioma = teclado.nextLine();
       }
-      List<Libro> dbLibros = libroRepository.filtrarLibrosPorIdioma(codigoIdioma);
-
-      if (dbLibros.isEmpty()) {
-         System.out.println("No hay libros registrados del idioma : " + codigoIdioma);
-      } else {
+      List<LibroAutorDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
+      if (!dbLibros.isEmpty()) {
          dbLibros.forEach(System.out::println);
+      } else {
+         System.out.println("No hay libros registrados del idioma : " + codigoIdioma);
       }
    }
 

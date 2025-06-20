@@ -17,7 +17,8 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
    @Query("SELECT a FROM Autor a WHERE a.yearDead<>0")   // o a.year_dead=null
    List<Autor> filtrarAutoresFallecidos();
 
+   // Queries nativos
    @Query(value = "SELECT nombre, year_born, year_dead FROM autores", nativeQuery = true)
-   List<Object[]> findAutoresRaw();
+   List<Object[]> listarAutoresBD();
 
 }

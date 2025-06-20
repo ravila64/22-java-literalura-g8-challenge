@@ -1,10 +1,12 @@
 package com.aluracursos.literalura.repository;
 
 import com.aluracursos.literalura.dto.AutorDTO;
+import com.aluracursos.literalura.dto.LibroAutorDTO;
 import com.aluracursos.literalura.model.DatosLibro;
 import com.aluracursos.literalura.model.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +14,8 @@ import java.util.Optional;
 public interface LibroRepository extends JpaRepository<Libro, Long> {
    Optional<Libro> findByTituloContainsIgnoreCase(String title);
 
-   @Query("SELECT l FROM Libro l WHERE l.idioma = :lang")
-   List<Libro> filtrarLibrosPorIdioma(String lang);
+//   @Query("SELECT l FROM Libro l WHERE l.idioma = :lang")
+//   List<Libro> filtrarLibrosPorIdioma(String lang);
 
    // Realiza una unión interna entre Libro y su relación autor,
    // y usa FETCH para traer también los datos del autor en la misma consulta,
@@ -27,7 +29,21 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     FROM libros l
     INNER JOIN autores a ON l.autor_id = a.id
     """, nativeQuery = true)
-   //List<Object[]> findLibroAutorRaw();
-   List<Object[]> findLibroAutorRaw();
+   List<Object[]> listarLibrosYAutores();
 
+//   @Query(value = """
+//    SELECT l.titulo AS titulo, a.nombre AS nombreAutor
+//    FROM libros l
+//    INNER JOIN autores a ON l.autor_id = a.id
+//    WHERE l.idioma LIKE :lang%
+//    """, nativeQuery = true)
+//   List<LibroAutorDTO> filtrarLibrosPorIdioma(String lang);
+
+   @Query(value = """
+    SELECT l.titulo, a.nombre  FROM libros l 
+    INNER JOIN autores a ON l.autor_id = a.id 
+    WHERE l.idioma LIKE :language """,
+    nativeQuery = true)
+   List<LibroAutorDTO> buscarLibrosPorIdiomaLike(String language);
+   //List<LibroAutorDTO> buscarLibrosPorIdiomaLike(@Param("idioma") String language);
 }
