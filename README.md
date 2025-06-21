@@ -7,8 +7,8 @@ para BackEnd
 
 <h2>**22-java-literalura-g8-challenge**</h2>
 <h3>Inicio</h3>
-<em> MENU DE OPCIONES </em>
-- - - - - - - - - - - - - - - - - - - - - -
+<em> MENU DE OPCIONES </em> <br/>
+- - - - - - - - - - - - - - - - - - - - - - <br/>
 1. Buscar libro por título y grabar en BD. </br>
 2. Listar libros registrados BD. </br>
 3. Listar autores registrados BD. </br>
@@ -47,22 +47,20 @@ Por medio del siguiente MENU DE OPCIONES:
 2. [Listar libros registrados BD](#Listar-libros-registrados-bd)
 3. [Listar autores registrados BD](#Listar-autores-registrados-bd)
 4. [Listar autores vivos en un determinado año BD](#listar-autores-vivos-en-un-determinado-año-bd)
-
-
+5. [Listar autores fallecidos BD](#listar-autores-fallecidos-bd)
+6. [Listar libros por idioma BD](#listar-libros-por-idioma-bd)
+7. [Libros mas populares en la API GUTENDEX](#Libros-mas-populares-en-la-api-gutendex)
+8. [Buscar autor por nombre BD](#buscar-autor-por-nombre-db)
+0. [Salir](#salir)
 
 [Descripción proyecto](#descripción-proyecto) \
 [Como usar el programa](#como-usar-el-programa) \
 
-[Listado paises incluidos para conversión](#listado-de-paises-incluidos-para-conversión) \
-[Conversión de monedas](#Conversión-de-monedas) \
-[Listar paises con nombres similares](#Listar-paises-con-nombres-similares)\
-[Listar registros con marca de tiempo](#Listar-registros-con-marca-de-tiempo) \
-[Listar registros de una fecha especifica](#Listar-registros-de-una-fecha-especifica) \
 [Tecnologías utilizadas](#Tecnologías-utilizadas) \
 [Personas o entidades contribuyentes en el Proyecto](#Personas-o-entidades-contribuyentes-en-el-Proyecto) \
 [Desarrolladores del Proyecto](#Desarrolladores-del-Proyecto)
 
-<h2>Como usar el programa</h2>
+<h2>Como usar el programa</h2> <br/> 
 **Literalura**   <br/>
 1. Buscar libro por título y grabar en BD.
 2. Listar libros registrados BD.
@@ -94,6 +92,7 @@ Hibernate: insert into libros (autor_id,idioma,titulo) values (?,?,?) </br>
 
 <h2>Listar libros registrados BD</h2> 
 Digite opcion [1..8] 0=Salir--->2 </br>
+```
 Hibernate: SELECT l.titulo AS titulo, a.nombre AS nombreAutor </br>
 FROM libros l </br>
 INNER JOIN autores a ON l.autor_id = a.id </br>
@@ -107,113 +106,115 @@ LibroAutor{Titulo='Shakespeare, William'Autor='The Complete Works of William Sha
 LibroAutor{Titulo='Eliot, George'Autor='Middlemarch'} </br>
 LibroAutor{Titulo='Alcott, Louisa May'Autor='Little Women; Or, Meg, Jo, Beth, and Amy'} </br>
 Cantidad de libros 8 </br>
-```
+
 [Inicio](#Inicio)
 <h2>Listar autores registrados BD</h2> 
 Digite opcion [1..8] 0=Salir--->3</br>
+```
 Hibernate: SELECT nombre, year_born, year_dead FROM autores </br>
 ```
-Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616}
-Autor{nombre='Melville, Herman', year_born=1819, year_dead=1891}
-Autor{nombre='Hugo, Victor', year_born=1802, year_dead=1885}
-Autor{nombre='Shelley, Mary Wollstonecraft', year_born=1797, year_dead=1851}
-Autor{nombre='Austen, Jane', year_born=1775, year_dead=1817}
-Autor{nombre='Shakespeare, William', year_born=1564, year_dead=1616}
-Autor{nombre='Eliot, George', year_born=1819, year_dead=1880}
-Autor{nombre='Alcott, Louisa May', year_born=1832, year_dead=1888}
-Cantidad de autores grabados 8
+Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </br>
+Autor{nombre='Melville, Herman', year_born=1819, year_dead=1891} </br>
+Autor{nombre='Hugo, Victor', year_born=1802, year_dead=1885} </br>
+Autor{nombre='Shelley, Mary Wollstonecraft', year_born=1797, year_dead=1851} </br>
+Autor{nombre='Austen, Jane', year_born=1775, year_dead=1817} </br>
+Autor{nombre='Shakespeare, William', year_born=1564, year_dead=1616} </br>
+Autor{nombre='Eliot, George', year_born=1819, year_dead=1880} </br>
+Autor{nombre='Alcott, Louisa May', year_born=1832, year_dead=1888} </br>
+Cantidad de autores grabados 8 </br>
+
+[Inicio](#Inicio)
+
+<h2>Listar autores vivos en un determinado año BD</h2> 
+Digite opcion [1..8] 0=Salir--->4 </br>
+Ingresa el año para consultar los autores que vivieron alredor de ese año :
+1950 </br>
 ```
-[Inicio](#Inicio)
-
-<h2>Listar autores vivos en un determinado año BD</h2>
-<h4>Al seleccionar opcion 1. Sale un listado asi:</h4>
-
-1-(AED)=United Arab Emirates *|* 2-(AFN)=Afghanistan *|* 3-(ALL)=Albania *|* 4-(AMD)=Armenia *|* 5-(ANG)=Netherlands Antilles *|* _
-6-(AOA)=Angola *|* 7-(ARS)=Argentina *|* 8-(AUD)=Australia *|* 9-(AWG)=Aruba *|* 10-(AZN)=Azerbaijan *|* _
-11-(BAM)=Bosnia and Herzegovina *|* 12-(BBD)=Barbados *|* 13-(BDT)=Bangladesh *|* 14-(BGN)=Bulgaria *|* 15-(BHD)=Bahrain *|* _
-16-(BIF)=Burundi *|* 17-(BMD)=Bermuda *|* 18-(BND)=Brunei *|* 19-(BOB)=Bolivia *|* 20-(BRL)=Brazil *|* _
-21-(BSD)=Bahamas *|* 22-(BTN)=Bhutan *|* 23-(BWP)=Botswana *|* 24-(BYN)=Belarus *|* 25-(BZD)=Belize *|* _
-26-(CAD)=Canada *|* 27-(CDF)=Democratic Republic of the Congo *|* 28-(CHF)=Switzerland *|* 29-(CLP)=Chile *|* 30-(CNY)=China *|* _
-31-(COP)=Colombia *|* 32-(CRC)=Costa Rica *|* 33-(CUP)=Cuba *|* 34-(CVE)=Cape Verde *|* 35-(CZK)=Czech Republic *|* _ <br/>
-asi.. hasta completar los paises, que maneja la API.<br/>
-[link API-Exchangerate](https://www.exchangerate-api.com/docs/overview) </br>
-[Inicio](#Inicio)
-
-
-<h2>Conversión de monedas</h2>
-<h4>opcion 2.</h4>
-Digite opción [1..5] o [9.Salir] 2
-
-Digite Pais Fuente :colombia <br/>
-Pais{codeCurrency='COP', currencyName='Colombian Peso', country='Colombia'} <br/>
-Codigo moneda :COP, pais :Colombia <br/>
-Digite Pais Destino :estados unidos <br/>
-Pais{codeCurrency='USD', currencyName='United States Dollar', country='Estados Unidos'} <br/>
-A Codigo moneda :USD, pais :Estados Unidos <br/>
-Valor a convertir, en COP :500000
-
-Resultado.\
-Result :Currency[base_code=COP, target_code=USD, conversion_rate=2.3622E-4] <br/>
-Conversion 500000,00  COP   Colombian Peso son 118,11  USD United States Dollar <br/>
-<h4>Explicación.</h4>
-En la digitación o captura del pais, sea fuente o destino, se valida que el país, <br/>
-este el la tabla de conversiones.<br/>
-No puede colocar paises repetidos, o nombres de paises que no esten. <br/>
-Ejemplo. Colombia, puede colocar colo, Colo, Colomb, col, Colombia, etc. <br/>
-El programa le pasa todo el texto a minúscula y mayúscula a la primera letra.<br/>
-Para el caso de Europa, donde hay 27 paises que utilizan el EURO, hay que digitar
-"European Union" o "union", para que tome el EURO. </br>
+Hibernate: select a1_0.id,a1_0.nombre,a1_0.year_born,a1_0.year_dead from autores a1_0 where a1_0.year_born<=? and a1_0.year_dead is null
+```
+No hay autores vivos </br>
 
 [Inicio](#Inicio)
 
-<h2>Listar paises con nombres similares</h2>
-<h4>Opcion 3.</h4>
+<h2>Listar autores fallecidos BD</h2>
+Digite opcion [1..8] 0=Salir---> 
+```
+Hibernate: SELECT nombre, year_born, year_dead FROM autores WHERE year_dead IS NOT NULL
+```
+Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </br>
+Autor{nombre='Melville, Herman', year_born=1819, year_dead=1891} </br>
+Autor{nombre='Hugo, Victor', year_born=1802, year_dead=1885} </br>
+Autor{nombre='Shelley, Mary Wollstonecraft', year_born=1797, year_dead=1851} </br>
+Autor{nombre='Austen, Jane', year_born=1775, year_dead=1817} </br>
+Autor{nombre='Shakespeare, William', year_born=1564, year_dead=1616} </br>
+Autor{nombre='Eliot, George', year_born=1819, year_dead=1880} </br>
+Autor{nombre='Alcott, Louisa May', year_born=1832, year_dead=1888} </br>
+Cantidad de autores grabados 8 </br>
 
-Dígite Pais con nombres similiares :pa
-
-**Paises con nombres similares** <br/>
-->Panama PAB <br/>
-->Papua New Guinea PGK <br/>
-->Pakistan PKR <br/>
-->Paraguay PYG <br/>
-<h4>Explicación.</h4>
-Se puede digitar como minimo 2 caracteres del nombre del pais a BUSCAR <br/>
-
-[Inicio](#Inicio)
-
-<h2>Listar registros con marca de tiempo</h2>
-<h4>Opcion 4.</h4>
-Digite opción [1..5] o [9.Salir] 4 <br/>
-Moneda{base='COP', target='USD', factor =2.3618E-4, valor a convertir=100000.0, valor conversion=23.618000000000002, fecha='2025-05-04 16:37:27'} <br/>
-Moneda{base='COP', target='USD', factor =2.3502E-4, valor a convertir=10000.0, valor conversion=2.3502, fecha='2025-05-06 10:18:53'} <br/>
-Moneda{base='EUR', target='USD', factor =1.1321, valor a convertir=10000.0, valor conversion=11321.000000000002, fecha='2025-05-06 10:40:16'} <br/>
-Moneda{base='USD', target='AED', factor =3.6725, valor a convertir=10000.0, valor conversion=36725.0, fecha='2025-05-06 11:00:23'} <br/>
-Lista todas las transacciones que se han realizado hasta el momento. <br/>
-
-<h4>Explicación.</h4>
-Con esta opcion usted vera todos los movimientos diarios, que estan en <br/>
-en los registros grabados, cuando se hace una conversión. <br/>
 
 [Inicio](#Inicio)
 
-<h2>Listar registros de una fecha especifica</h2>
-<h4>Opcion 5.</h4>
-Digite opción [1..5] o [9.Salir] 5 </br>
+<h2>Listar libros por idioma BD</h2>
+<h3>*** EN CONSTRUCCION, me esta saliendo un error **** </h3>
 
-Ingrese una fecha Inicial (yyyy-MM-dd): 2025-05-04 </br>
-Ingrese una fecha Final (yyyy-MM-dd): 2025-05-30 </br>
-Resultado: </br>
-Listado de movimientos entre 2025-05-04 hasta 2025-05-30 </br>
-Moneda{base='COP', target='USD', factor=2.3618E-4, valor convertir=100000.0, valor conversion=23.618000000000002, fecha='2025-05-04 16:37:27'} </br>
-Moneda{base='COP', target='USD', factor=2.3502E-4, valor convertir=10000.0, valor conversion=2.3502, fecha='2025-05-06 10:18:53'} </br>
-Moneda{base='EUR', target='USD', factor=1.1321, valor convertir=10000.0, valor conversion=11321.000000000002, fecha='2025-05-06 10:40:16'} </br>
-Moneda{base='USD', target='AED', factor=3.6725, valor convertir=10000.0, valor conversion=36725.0, fecha='2025-05-06 11:00:23'} </br>
+Digite opcion [1..8] 0=Salir--->6  </br>
+[es] - Español       [en] - Inglés </br>
+[it] - Italiano      [fr] - Francés </br>
+[pt] - Portugués     [fi] - Filandés </br>
+
+Ingrese codigo del idioma a buscar: ej: es=español en=english---> en </br>
+```
+Hibernate: SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%') </br>
+```
+2025-06-20T18:37:57.851-05:00  WARN 12696 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 42601 </br>
+2025-06-20T18:37:57.860-05:00 ERROR 12696 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: error de sintaxis al final de la entrada </br>
+Position: 76 </br>
+2025-06-20T18:37:57.931-05:00  INFO 12696 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : </br>
+</br>
+[Inicio](#Inicio)
+
+<h2>Libros mas populares en la API GUTENDEX</h2>
+
+Digite opcion [1..8] 0=Salir--->7 </br> 
+Libros mas populares </br>
+DLibro{autores=[DatosAutor[nombre=Shelley, Mary Wollstonecraft, yearBorn=1797, yearDead=1851]], titulo='Frankenstein; Or, The Modern Prometheus', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Melville, Herman, yearBorn=1819, yearDead=1891]], titulo='Moby Dick; Or, The Whale', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Shakespeare, William, yearBorn=1564, yearDead=1616]], titulo='Romeo and Juliet', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Austen, Jane, yearBorn=1775, yearDead=1817]], titulo='Pride and Prejudice', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Carroll, Lewis, yearBorn=1832, yearDead=1898]], titulo='Alice's Adventures in Wonderland', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Shakespeare, William, yearBorn=1564, yearDead=1616]], titulo='The Complete Works of William Shakespeare', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Alcott, Louisa May, yearBorn=1832, yearDead=1888]], titulo='Little Women; Or, Meg, Jo, Beth, and Amy', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Eliot, George, yearBorn=1819, yearDead=1880]], titulo='Middlemarch', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Forster, E. M. (Edward Morgan), yearBorn=1879, yearDead=1970]], titulo='A Room with a View', idiomas=[en]} </br>
+DLibro{autores=[DatosAutor[nombre=Fitzgerald, F. Scott (Francis Scott), yearBorn=1896, yearDead=1940]], titulo='The Great Gatsby', idiomas=[en]} </br>
+</br>
+Explicación : generalmente son los libros que presentan mas descargas. (este campo no lo utilice) </br>
+Utilice un endpoint de Gutendex </br>
+
+[Inicio](#Inicio)
+
+<h2>Buscar autor por nombre BD</h2>
+Digite opcion [1..8] 0=Salir--->8 </br>
+Digite nombre autor a buscar en BD : cervantes </br>
+```
+Hibernate: SELECT nombre, year_born, year_dead FROM autores WHERE LOWER(nombre) LIKE LOWER(CONCAT('%',?,'%')) </br>
+```
+Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </br>
+- - - - - - - - - - - - - - - - - - - - - - </br>
+
+[Inicio](#Inicio)
+<h2>Salir</h2>
+Digite opcion [1..8] 0=Salir--->0 </br>
+Cerrando la menuPrincipal... </br>
+2025-06-20T19:03:29.365-05:00  INFO 264 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' </br>
+2025-06-20T19:03:29.375-05:00  INFO 264 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated... </br>
+2025-06-20T19:03:29.437-05:00  INFO 264 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed. </br>
+
 [Inicio](#Inicio)
 
 <h2>Tecnologías utilizadas</h2>
-
 - Java
-- Manejo de API's
+- Manejo de API GUTENDEX
 - Postman  (para hacer las pruebas de la API)
 - Editor IDE, Intellij IDEA
 - git, github y terminal.
@@ -234,6 +235,6 @@ Moneda{base='USD', target='AED', factor=3.6725, valor convertir=10000.0, valor c
 <h2>Desarrolladores del Proyecto</h2>
 - René Avila Alonso.
 - Desarrollador BackEnd
-- May, 2025. </br>
+- June, 2025. </br>
 
 [Inicio](#Inicio)
