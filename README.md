@@ -53,11 +53,11 @@ Por medio del siguiente MENU DE OPCIONES: <br/>
 8. [Buscar autor por nombre BD](#buscar-autor-por-nombre-db)
 0. [Salir](#salir)
 
-[Descripción proyecto](#descripción-proyecto) 
-[Como usar el programa](#como-usar-el-programa) 
-[Tecnologías utilizadas](#Tecnologías-utilizadas) 
-[Personas o entidades contribuyentes en el Proyecto](#Personas-o-entidades-contribuyentes-en-el-Proyecto) 
-[Desarrolladores del Proyecto](#Desarrolladores-del-Proyecto)
+[Descripción proyecto](#descripción-proyecto) <br/>
+[Como usar el programa](#como-usar-el-programa) <br/> 
+[Tecnologías utilizadas](#Tecnologías-utilizadas) <br/>
+[Personas o entidades contribuyentes en el Proyecto](#Personas-o-entidades-contribuyentes-en-el-Proyecto) <br/> 
+[Desarrolladores del Proyecto](#Desarrolladores-del-Proyecto) <br/>
 
 <h2>Como usar el programa</h2> <br/> 
 **Literalura**   <br/>
