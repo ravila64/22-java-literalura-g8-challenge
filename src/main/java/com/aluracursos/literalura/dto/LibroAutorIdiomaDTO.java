@@ -1,15 +1,16 @@
 package com.aluracursos.literalura.dto;
 
 public class LibroAutorIdiomaDTO {
-   private String titulo;
    private String idioma;
    private String nombreAutor;
+   private String titulo;
 
    public LibroAutorIdiomaDTO(String idioma, String nombreAutor, String titulo) {
       this.idioma = idioma;
       this.nombreAutor = nombreAutor;
       this.titulo = titulo;
    }
+
    // getters and setters
 
    public String getIdioma() {
@@ -36,12 +37,13 @@ public class LibroAutorIdiomaDTO {
       this.titulo = titulo;
    }
 
+   // revisar la posicion del elemento en el objeto
    @Override
    public String toString() {
       return "LibroAutorIdiomaDTO{" +
-            "idioma='" + idioma + '\'' +
-            ", titulo='" + titulo + '\'' +
+            "Titulo='" + idioma + '\'' +
             ", nombreAutor='" + nombreAutor + '\'' +
+            ", idioma='" + titulo + '\'' +
             '}';
    }
 }

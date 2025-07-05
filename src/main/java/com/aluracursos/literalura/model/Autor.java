@@ -78,7 +78,7 @@ public class Autor {
       return "Autor{" +
             ", nombre='" + nombre + '\'' +
             ", yearBorn=" + yearBorn +
-            ", yearDead=" + yearDead +
+            ", yearDeath=" + yearDead +
             ", libros=" + libros +
             '}';
    }

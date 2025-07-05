@@ -1,6 +1,5 @@
 package com.aluracursos.literalura.repository;
 
-import com.aluracursos.literalura.dto.LibroAutorIdiomaDTO;
 import com.aluracursos.literalura.dto.LibroDTO;
 import com.aluracursos.literalura.model.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,11 +14,10 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 
 //   @Query("SELECT l FROM Libro l WHERE l.idioma = :lang")
 //   List<Libro> filtrarLibrosPorIdioma(String lang);
-
-   // Realiza una unión interna entre Libro y su relación autor,
-   // y usa FETCH para traer también los datos del autor en la misma consulta,
-   // evitando el lazy loading.
-   // @Query("SELECT l FROM Libro l JOIN FETCH l.autor")  //jpql
+   //** Realiza una unión interna entre Libro y su relación autor,
+   //** y usa FETCH para traer también los datos del autor en la misma consulta,
+   //** evitando el lazy loading.
+   //** @Query("SELECT l FROM Libro l JOIN FETCH l.autor")  //jpql
 //   @Query(value = "SELECT * FROM libros l INNER JOIN autores a ON l.autor_id=a.id", nativeQuery = true ) //sql nativo
 //   List<Libro> obtenerLibrosConAutores();
 
@@ -34,7 +32,7 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 //   Optional<LibroDTO> buscarLibrosPorIdiomaLike(String lang);
 
    @Query(value = """
-    SELECT l.titulo, l.idioma, a.nombre FROM libros l 
+    SELECT l.titulo, a.nombre, l.idioma FROM libros l 
     INNER JOIN autores a ON l.autor_id = a.id 
     WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',:language,'%')) 
     """, nativeQuery = true)

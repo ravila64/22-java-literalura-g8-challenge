@@ -9,7 +9,7 @@ para BackEnd
 <h3>Inicio</h3>
 <em> MENU DE OPCIONES </em> <br/>
 - - - - - - - - - - - - - - - - - - - - - - <br/>
-1. Buscar libro por título y grabar en BD. </br>
+1. Buscar libro en API por título y grabar en BD. </br>
 2. Listar libros registrados BD. </br>
 3. Listar autores registrados BD. </br>
 4. Listar autores vivos en un determinado año BD. </br>
@@ -43,7 +43,7 @@ E) Filtros o busquedas de libros o autores; <br/>
 F) y exibición de resultados a los usuarios <br/>
 Por medio del siguiente MENU DE OPCIONES: <br/>
 
-1. [Buscar libro por titulo](#buscar-libro-por-titulo)
+1. [Buscar libro por titulo y grabar bd](#buscar-libro-por-titulo-y-grabar-bd)
 2. [Listar libros registrados BD](#Listar-libros-registrados-bd)
 3. [Listar autores registrados BD](#Listar-autores-registrados-bd)
 4. [Listar autores vivos en un determinado año BD](#listar-autores-vivos-en-un-determinado-año-bd)
@@ -76,7 +76,7 @@ Digite opción [1..8] o [0.Salir] 1 <br/>
 Aqui puede digitar la opcion, dentro del rango permitido, si hay error </br>
 de digitación se devuelve a leer opción. </br>
 
-<h2>Buscar libro por titulo</h2>
+<h2>Buscar libro por titulo y grabar bd</h2>
 Digite opcion [1..8] 0=Salir--->1 </br>
 Ingresar titulo del libro a buscar: 
 Little Women </br>
@@ -96,14 +96,14 @@ Hibernate: SELECT l.titulo AS titulo, a.nombre AS nombreAutor </br>
 FROM libros l </br>
 INNER JOIN autores a ON l.autor_id = a.id </br>
 ```
-LibroAutor{Titulo='Cervantes Saavedra, Miguel de'Autor='Don Quijote'} </br> 
-LibroAutor{Titulo='Melville, Herman'Autor='Moby Dick; Or, The Whale'} </br> 
-LibroAutor{Titulo='Hugo, Victor'Autor='Los miserables - Tomo 1 (de 2)'}   </br>
-LibroAutor{Titulo='Shelley, Mary Wollstonecraft'Autor='Frankenstein; Or, The Modern Prometheus'} </br>
-LibroAutor{Titulo='Austen, Jane'Autor='Pride and Prejudice'} </br>
-LibroAutor{Titulo='Shakespeare, William'Autor='The Complete Works of William Shakespeare'} </br>
-LibroAutor{Titulo='Eliot, George'Autor='Middlemarch'} </br>
-LibroAutor{Titulo='Alcott, Louisa May'Autor='Little Women; Or, Meg, Jo, Beth, and Amy'} </br>
+LibroAutor{Titulo='Don Quijote'Autor='Cervantes Saavedra, Miguel de'} </br> 
+LibroAutor{Titulo='Moby Dick; Or, The Whale'Autor='Melville, Herman'} </br>
+LibroAutor{Titulo='Los miserables - Tomo 1 (de 2)'Autor='Hugo, Victor'} </br>
+LibroAutor{Titulo='Frankenstein; Or, The Modern Prometheus'Autor='Shelley, Mary Wollstonecraft'} </br>
+LibroAutor{Titulo='Pride and Prejudice'Autor='Austen, Jane'} </br>
+LibroAutor{Titulo='The Complete Works of William Shakespeare'Autor='Shakespeare, William'} </br>
+LibroAutor{Titulo='Middlemarch'Autor='Eliot, George'} </br>
+LibroAutor{Titulo='Little Women; Or, Meg, Jo, Beth, and Amy'Autor='Alcott, Louisa May'} </br>
 Cantidad de libros 8 </br>
 
 [Inicio](#Inicio)
@@ -153,19 +153,23 @@ Cantidad de autores grabados 8 </br>
 [Inicio](#Inicio)
 
 <h2>Listar libros por idioma BD</h2>
-<h3>*** arreglada **** </h3>
 
-
-Digite opcion [1..8] 0=Salir--->6  </br>
+Digite opcion [1..8] 0=Salir--->6 </br>
 [es] - Español       [en] - Inglés </br>
 [it] - Italiano      [fr] - Francés </br>
 [pt] - Portugués     [fi] - Filandés </br>
 
-Ingrese codigo del idioma a buscar: ej: es=español en=english---> en </br>
+Ingrese codigo del idioma a buscar: ej: es=español en=english---> es </br>
+Hibernate: SELECT l.titulo, a.nombre, l.idioma FROM libros l </br>
+INNER JOIN autores a ON l.autor_id = a.id </br>
+WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%')) </br>
+
+LibroAutorIdiomaDTO{Titulo='Don Quijote', nombreAutor='Cervantes Saavedra, Miguel de', idioma='es'} </br>
+LibroAutorIdiomaDTO{Titulo='Los miserables - Tomo 1 (de 2)', nombreAutor='Hugo, Victor', idioma='es'} </br>
+Cantidad de libros 2 </br>
 ```
 Hibernate: SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%') </br>
 ```
-COLOCAR AQUI EL RESULTADO DE LA QUERY, ejemplos en=english, es=español </br> 
 </br>
 [Inicio](#Inicio)
 
