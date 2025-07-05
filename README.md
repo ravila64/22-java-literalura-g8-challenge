@@ -24,7 +24,7 @@ NOTAS ANTES DE UTILIZAR EL PROYECTO </br>
 * o Colocar DB_NAME = db_libros, y en properties dejar DB_NAME </br>
 * Se esta utilizando JDK 17, e Intellij IDEA </br>
 * Las opciones 1) esta capturando los libros y se sale del programa </br>
-* y la opcion 6) busqueda x idioma, no me ha funcionado, en desarrollo. </br>
+* y la opcion 6) busqueda x idioma, arreglada jul/2025. </br>
 * Las demas opciones estan FUNCIONANDO. </br>
 
 <h2>Descripción proyecto</h2>
@@ -153,7 +153,8 @@ Cantidad de autores grabados 8 </br>
 [Inicio](#Inicio)
 
 <h2>Listar libros por idioma BD</h2>
-<h3>*** EN CONSTRUCCION, me esta saliendo un error **** </h3>
+<h3>*** arreglada **** </h3>
+
 
 Digite opcion [1..8] 0=Salir--->6  </br>
 [es] - Español       [en] - Inglés </br>
@@ -164,10 +165,7 @@ Ingrese codigo del idioma a buscar: ej: es=español en=english---> en </br>
 ```
 Hibernate: SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%') </br>
 ```
-2025-06-20T18:37:57.851-05:00  WARN 12696 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 42601 </br>
-2025-06-20T18:37:57.860-05:00 ERROR 12696 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: error de sintaxis al final de la entrada </br>
-Position: 76 </br>
-2025-06-20T18:37:57.931-05:00  INFO 12696 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : </br>
+COLOCAR AQUI EL RESULTADO DE LA QUERY, ejemplos en=english, es=español </br> 
 </br>
 [Inicio](#Inicio)
 

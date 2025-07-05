@@ -1,9 +1,6 @@
 package com.aluracursos.literalura.main;
 
-import com.aluracursos.literalura.dto.AutorDTO;
-import com.aluracursos.literalura.dto.Datos;
-import com.aluracursos.literalura.dto.LibroAutorDTO;
-import com.aluracursos.literalura.dto.LibroDTO;
+import com.aluracursos.literalura.dto.*;
 import com.aluracursos.literalura.model.Autor;
 import com.aluracursos.literalura.model.DatosLibro;
 import com.aluracursos.literalura.model.Libro;
@@ -72,7 +69,8 @@ public class MainLiterAlura {
                obtenerTodosLosAutores(2);
                break;
             case 6:
-               obtenerLibrosPorIdioma();
+               //obtenerLibrosPorIdioma();
+               obtenerLibrosAutoresIdioma();
                break;
             case 7:
                obtenerLibrosMasPopulares();
@@ -145,6 +143,43 @@ public class MainLiterAlura {
    public void obtenerTodosLosLibros() {
       //List<Libro> dbLibros = libroRepository.findAll();
       List<LibroAutorDTO> librosAutores = this.getLibroAutor();
+      if (!librosAutores.isEmpty()) {
+         librosAutores.forEach(System.out::println);
+         System.out.println("Cantidad de libros " + librosAutores.size());
+      } else {
+         System.out.println("No existen libros");
+      }
+   }
+
+   public List<LibroAutorIdiomaDTO> getLibroAutorIdioma() {
+      List<String> idiomas = List.of("es", "en", "it", "fr", "pt", "fi");
+      String menuIdiomas = """
+            [es] - Español       [en] - Inglés
+            [it] - Italiano      [fr] - Francés
+            [pt] - Portugués     [fi] - Filandés 
+            """;
+      System.out.println(menuIdiomas);
+      System.out.print("Ingrese codigo del idioma a buscar: ej: es=español en=english---> ");
+      String codigoIdioma = teclado.nextLine();
+      // valida
+      while (!idiomas.contains(codigoIdioma)) {
+         System.out.println("Error, ingresar un idioma de la lista: ");
+         codigoIdioma = teclado.nextLine();
+      }
+
+      //List<Object[]> rawResults = libroRepository.listarLibrosYAutores();
+      List<Object[]> rawResults = libroRepository.findLibrosPorIdiomaLike(codigoIdioma);
+      return rawResults.stream()
+            .map(obj -> new LibroAutorIdiomaDTO(
+                  (String) obj[0],
+                  (String) obj[1],
+                  (String) obj[2]
+            ))
+            .collect(Collectors.toList());
+   }
+
+   public void obtenerLibrosAutoresIdioma() {
+      List<LibroAutorIdiomaDTO> librosAutores = this.getLibroAutorIdioma();
       if (!librosAutores.isEmpty()) {
          librosAutores.forEach(System.out::println);
          System.out.println("Cantidad de libros " + librosAutores.size());
@@ -231,17 +266,23 @@ public class MainLiterAlura {
          System.out.println("Error, ingresar un idioma de la lista: ");
          codigoIdioma = teclado.nextLine();
       }
-      //List<LibroAutorDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
 
-      Optional<LibroDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
-      if (dbLibros.isPresent()) {
-         List<LibroDTO> filtrados = dbLibros.stream()
-               .filter(libro -> idiomas.contains(libro.getIdioma()))
-               .toList();
-         filtrados.forEach(System.out::println);
-      } else {
-         System.out.println("No hay libros registrados del idioma : " + codigoIdioma);
-      }
+
+
+      //List<LibroAutorDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
+      codigoIdioma = codigoIdioma.trim().toLowerCase();
+      //Optional<LibroDTO> dbLibros = libroRepository.buscarLibrosPorIdiomaLike(codigoIdioma);
+      List<Object[]> dbLibros = libroRepository.findLibrosPorIdiomaLike(codigoIdioma);
+//      System.out.println("dblibros opcion 6, x idioma \n"+dbLibros);
+//      if (!dbLibros.isEmpty()) {
+//         List<LibroAutorIdiomaDTO> filtrados = dbLibros.stream()
+//               .filter(libro -> idiomas.contains(libro.getIdioma()))
+//               .toList();
+//         filtrados.forEach(System.out::println);
+//      } else {
+//         System.out.println("No hay libros registrados del idioma : " + codigoIdioma);
+//      }
+
    }
 
    public void obtenerLibrosMasPopulares() {

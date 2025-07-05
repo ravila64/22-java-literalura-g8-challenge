@@ -1,9 +1,11 @@
 package com.aluracursos.literalura.repository;
 
+import com.aluracursos.literalura.dto.LibroAutorIdiomaDTO;
 import com.aluracursos.literalura.dto.LibroDTO;
 import com.aluracursos.literalura.model.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,8 +30,15 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     """, nativeQuery = true)
    List<Object[]> listarLibrosYAutores();
 
-   @Query(value = "SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',:lang,'%') ", nativeQuery = true)
-   Optional<LibroDTO> buscarLibrosPorIdiomaLike(String lang);
+//   @Query(value = "SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',:lang,'%')); ", nativeQuery = true)
+//   Optional<LibroDTO> buscarLibrosPorIdiomaLike(String lang);
+
+   @Query(value = """
+    SELECT l.titulo, l.idioma, a.nombre FROM libros l 
+    INNER JOIN autores a ON l.autor_id = a.id 
+    WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',:language,'%')) 
+    """, nativeQuery = true)
+   List<Object[]> findLibrosPorIdiomaLike(@Param("language") String language);
 
    // buscar libros de un idioma
    List<LibroDTO> findByIdiomaIgnoreCase(String idioma);
