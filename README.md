@@ -5,6 +5,22 @@
 Proyecto desarrollado durante el curso de la formación Avanzando con Java de Alura
 para BackEnd
 
+[Descripción proyecto](#descripción-proyecto) <br/>
+[Como usar el programa](#como-usar-el-programa) <br/>
+[Tecnologías utilizadas](#Tecnologías-utilizadas) <br/>
+[Personas o entidades contribuyentes en el Proyecto](#Personas-o-entidades-contribuyentes-en-el-Proyecto) <br/>
+[Desarrolladores del Proyecto](#Desarrolladores-del-Proyecto) <br/>
+
+1. [Buscar libro por titulo y grabar bd](#buscar-libro-por-titulo-y-grabar-bd)
+2. [Listar libros registrados BD](#Listar-libros-registrados-bd)
+3. [Listar autores registrados BD](#Listar-autores-registrados-bd)
+4. [Listar autores vivos en un determinado año BD](#listar-autores-vivos-en-un-determinado-año-bd)
+5. [Listar autores fallecidos BD](#listar-autores-fallecidos-bd)
+6. [Listar libros por idioma BD](#listar-libros-por-idioma-bd)
+7. [Libros mas populares en la API GUTENDEX](#Libros-mas-populares-en-la-api-gutendex)
+8. [Buscar autor por nombre BD](#buscar-autor-por-nombre-db)
+0. [Salir](#salir)
+
 <h2>**22-java-literalura-g8-challenge**</h2>
 <h3>Inicio</h3>
 <em> MENU DE OPCIONES </em> <br/>
@@ -42,22 +58,6 @@ D) Análisis de la Respuesta JSON; <br/>
 E) Filtros o busquedas de libros o autores; <br/>
 F) y exibición de resultados a los usuarios <br/>
 Por medio del siguiente MENU DE OPCIONES: <br/>
-
-1. [Buscar libro por titulo y grabar bd](#buscar-libro-por-titulo-y-grabar-bd)
-2. [Listar libros registrados BD](#Listar-libros-registrados-bd)
-3. [Listar autores registrados BD](#Listar-autores-registrados-bd)
-4. [Listar autores vivos en un determinado año BD](#listar-autores-vivos-en-un-determinado-año-bd)
-5. [Listar autores fallecidos BD](#listar-autores-fallecidos-bd)
-6. [Listar libros por idioma BD](#listar-libros-por-idioma-bd)
-7. [Libros mas populares en la API GUTENDEX](#Libros-mas-populares-en-la-api-gutendex)
-8. [Buscar autor por nombre BD](#buscar-autor-por-nombre-db)
-0. [Salir](#salir)
-
-[Descripción proyecto](#descripción-proyecto) <br/>
-[Como usar el programa](#como-usar-el-programa) <br/> 
-[Tecnologías utilizadas](#Tecnologías-utilizadas) <br/>
-[Personas o entidades contribuyentes en el Proyecto](#Personas-o-entidades-contribuyentes-en-el-Proyecto) <br/> 
-[Desarrolladores del Proyecto](#Desarrolladores-del-Proyecto) <br/>
 
 <h2>Como usar el programa</h2> <br/> 
 **Literalura**   <br/>
@@ -167,6 +167,26 @@ WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%')) </br>
 LibroAutorIdiomaDTO{Titulo='Don Quijote', nombreAutor='Cervantes Saavedra, Miguel de', idioma='es'} </br>
 LibroAutorIdiomaDTO{Titulo='Los miserables - Tomo 1 (de 2)', nombreAutor='Hugo, Victor', idioma='es'} </br>
 Cantidad de libros 2 </br>
+
+Otra busqueda </br>
+Digite opcion [1..8] 0=Salir--->6 </br>
+[es] - Español       [en] - Inglés </br>
+[it] - Italiano      [fr] - Francés </br>
+[pt] - Portugués     [fi] - Filandés </br>
+
+Ingrese codigo del idioma a buscar: ej: es=español en=english---> en </br>
+Hibernate: SELECT l.titulo, a.nombre, l.idioma FROM libros l </br>
+INNER JOIN autores a ON l.autor_id = a.id </br>
+WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%')) </br>
+
+LibroAutorIdiomaDTO{Titulo='Moby Dick; Or, The Whale', nombreAutor='Melville, Herman', idioma='en'} </br>
+LibroAutorIdiomaDTO{Titulo='Frankenstein; Or, The Modern Prometheus', nombreAutor='Shelley, Mary Wollstonecraft', idioma='en'} </br>
+LibroAutorIdiomaDTO{Titulo='Pride and Prejudice', nombreAutor='Austen, Jane', idioma='en'} </br>
+LibroAutorIdiomaDTO{Titulo='The Complete Works of William Shakespeare', nombreAutor='Shakespeare, William', idioma='en'} </br>
+LibroAutorIdiomaDTO{Titulo='Middlemarch', nombreAutor='Eliot, George', idioma='en'} </br>
+LibroAutorIdiomaDTO{Titulo='Little Women; Or, Meg, Jo, Beth, and Amy', nombreAutor='Alcott, Louisa May', idioma='en'} </br>
+Cantidad de libros 6
+
 ```
 Hibernate: SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%') </br>
 ```
@@ -205,7 +225,7 @@ Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </
 [Inicio](#Inicio)
 <h2>Salir</h2>
 Digite opcion [1..8] 0=Salir--->0 </br>
-Cerrando la menuPrincipal... </br>
+Cerrando el Menu Principal... </br>
 2025-06-20T19:03:29.365-05:00  INFO 264 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default' </br>
 2025-06-20T19:03:29.375-05:00  INFO 264 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated... </br>
 2025-06-20T19:03:29.437-05:00  INFO 264 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed. </br>
@@ -223,6 +243,8 @@ Cerrando la menuPrincipal... </br>
 - Gson, Api de Java, desarrollada por Google. <br/>
 - plugins de Intellij IDEA, para mostrar README.md <br/>
 - Trello (planeador de actividades a seguir de un proyecto) <br/>
+- De Manejador de base de datos, ProgreSQL.  <br/>
+- Administrador de bases de datos, PGADMIN-4 <br/>
 
 [Inicio](#Inicio)
 
@@ -236,5 +258,5 @@ Cerrando la menuPrincipal... </br>
 - René Avila Alonso. <br/>
 - Desarrollador BackEnd <br/>
 - June, 2025. </br>
-
+- Arreglos July, 5th, 2025 </br> 
 [Inicio](#Inicio)

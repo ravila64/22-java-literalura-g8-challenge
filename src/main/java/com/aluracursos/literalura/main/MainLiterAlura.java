@@ -69,7 +69,6 @@ public class MainLiterAlura {
                obtenerTodosLosAutores(2);
                break;
             case 6:
-               //obtenerLibrosPorIdioma();
                obtenerLibrosAutoresIdioma();
                break;
             case 7:
@@ -80,10 +79,10 @@ public class MainLiterAlura {
                obtenerTodosLosAutores(3);
                break;
             case 0:
-               System.out.println("Cerrando la menuPrincipal...");
+               System.out.println("Cerrando el menu Principal...");
                break;
             default:
-               System.out.println("Opción invalida");
+               System.out.println("Opción invalida, seleccione opcion entre [0 y 8]");
                break;
          }
       } // end sw
@@ -184,7 +183,7 @@ public class MainLiterAlura {
          librosAutores.forEach(System.out::println);
          System.out.println("Cantidad de libros " + librosAutores.size());
       } else {
-         System.out.println("No existen libros");
+         System.out.println("No existen libros, en el idioma solicitado !!!");
       }
    }
 
