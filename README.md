@@ -112,6 +112,7 @@ Digite opcion [1..8] 0=Salir--->3</br>
 ```
 Hibernate: SELECT nombre, year_born, year_dead FROM autores </br>
 ```
+</br>
 Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </br>
 Autor{nombre='Melville, Herman', year_born=1819, year_dead=1891} </br>
 Autor{nombre='Hugo, Victor', year_born=1802, year_dead=1885} </br>
@@ -140,6 +141,7 @@ Digite opcion [1..8] 0=Salir---> <br/>
 ```
 Hibernate: SELECT nombre, year_born, year_dead FROM autores WHERE year_dead IS NOT NULL <br/>
 ```
+</br>
 Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </br>
 Autor{nombre='Melville, Herman', year_born=1819, year_dead=1891} </br>
 Autor{nombre='Hugo, Victor', year_born=1802, year_dead=1885} </br>
@@ -163,7 +165,7 @@ Ingrese codigo del idioma a buscar: ej: es=español en=english---> es </br>
 Hibernate: SELECT l.titulo, a.nombre, l.idioma FROM libros l </br>
 INNER JOIN autores a ON l.autor_id = a.id </br>
 WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,'%')) </br>
-
+</br>
 LibroAutorIdiomaDTO{Titulo='Don Quijote', nombreAutor='Cervantes Saavedra, Miguel de', idioma='es'} </br>
 LibroAutorIdiomaDTO{Titulo='Los miserables - Tomo 1 (de 2)', nombreAutor='Hugo, Victor', idioma='es'} </br>
 Cantidad de libros 2 </br>
@@ -194,7 +196,7 @@ Hibernate: SELECT * FROM libros l WHERE LOWER(l.idioma) LIKE LOWER(CONCAT('%',?,
 [Inicio](#Inicio)
 
 <h2>Libros mas populares en la API GUTENDEX</h2>
-
+</br>
 Digite opcion [1..8] 0=Salir--->7 </br> 
 Libros mas populares </br>
 DLibro{autores=[DatosAutor[nombre=Shelley, Mary Wollstonecraft, yearBorn=1797, yearDead=1851]], titulo='Frankenstein; Or, The Modern Prometheus', idiomas=[en]} </br>
@@ -219,6 +221,7 @@ Digite nombre autor a buscar en BD : cervantes </br>
 ```
 Hibernate: SELECT nombre, year_born, year_dead FROM autores WHERE LOWER(nombre) LIKE LOWER(CONCAT('%',?,'%')) </br>
 ```
+</br>
 Autor{nombre='Cervantes Saavedra, Miguel de', year_born=1547, year_dead=1616} </br>
 - - - - - - - - - - - - - - - - - - - - - - </br>
 
@@ -258,5 +261,6 @@ Cerrando el Menu Principal... </br>
 - René Avila Alonso. <br/>
 - Desarrollador BackEnd <br/>
 - June, 2025. </br>
-- Arreglos July, 5th, 2025 </br> 
+- Arreglos July, 5th, 2025 </br>
+  </br>
 [Inicio](#Inicio)

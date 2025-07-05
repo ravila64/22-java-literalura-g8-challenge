@@ -118,6 +118,7 @@ public class MainLiterAlura {
       } else if (libroEnAPI.isPresent()) {
          // busqueda y grabacion autor nuevo
          List<Autor> listaAutores = libroEnAPI.get().autores().stream()
+               .distinct()
                .map(a -> autorRepository.findByNombreContainsIgnoreCase(a.nombre())
                      .orElseGet(() -> autorRepository.save(new Autor(a))))
                .collect(Collectors.toList());
@@ -125,7 +126,7 @@ public class MainLiterAlura {
          libroRepository.save(nuevoLibroBD);
          System.out.println(nuevoLibroBD);
       } else {
-         System.out.println("Libro no encontrado !!! ");
+         System.out.println("El libro "+tituloLib+" no encontrado !!! ");
       }
    }
 
