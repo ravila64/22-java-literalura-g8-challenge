@@ -10,12 +10,4 @@ public record DatosLibro(
       @JsonAlias("authors") List<DatosAutor> autores,
       @JsonAlias("languages") List<String> idiomas
 ) {
-   @Override
-   public String toString() {
-      return "DLibro{" +
-            "autores=" + autores +
-            ", titulo='" + titulo + '\'' +
-            ", idiomas=" + idiomas +
-            '}';
-   }
 }
