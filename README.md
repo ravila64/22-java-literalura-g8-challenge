@@ -263,4 +263,4 @@ Cerrando el Menu Principal... </br>
 - June, 2025. </br>
 - Arreglos July, 5th, 2025 </br>
   </br>
-[Inicio](#Inicio)
+  [Inicio](#Inicio)
